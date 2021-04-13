@@ -1,3 +1,12 @@
 # django_blog_project
 
-Blogging website created using Django,HTML,CSS and Bootstrap.
+## Description:
+
+Blogging website where users can create a profile and log into website and create their own blogs.
+
+## Tools:
+  
+  Django
+  HTML
+  CSS
+  Bootstrap
