@@ -1,0 +1,27 @@
+.base{
+	background-color: #222;
+            color: #e6e6e6;
+}
+
+.blog{
+
+	background-color: black;
+	color:white;
+}
+
+.content{
+
+
+	margin: auto;
+	width:50%;
+	text-align: center;
+
+}
+
+.title{
+	font-family: 'New Tegomin', serif;
+}
+
+.bigbrand{
+	color:red;
+}

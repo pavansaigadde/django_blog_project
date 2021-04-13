@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<!-- User Profile heading -->
+ <div class="media border mt-3 mr-3 ">
+        <a href="{{ comment.author.bloguser.profile_pic.url }}"><img src="{{ post.author.bloguser.profile_pic.url }}" class="rounded-circle mt-3 ml-3" style="width:60px;"></a>
+
+      <div class="media-body mt-3">
+          <h2 > {{ comment.author.username }} </h2>
+          <p> Email: {{ comment.author.email }} </p> 
+          <div class="container " align='center'>  
+           <h1 class="display-3 text-bold">{{ comment.author.username|title }} Posts: </h1>
+          </div>
+      </div>  
+</div> 
+
+  {% for post in comment.author.posts.all %}
+    {% if post.published_date %}
+
+     <!-- Post Content -->
+    <div class="card content mt-3" >
+      {% if post.image %}
+            <img  src="{{ post.image.url }}">
+      {% endif %}
+    <!-- Author and Profile image-->
+        <div class="media" align='left'>
+          <img class="rounded-circle "
+        src="{{ post.author.bloguser.profile_pic.url }}"
+        style="width:50px;">
+        <div class="media-body align='left' ">
+          <h4><a href="{% url 'post_user_profile' pk=post.pk %}">
+            @{{post.author}}</a>
+          </h4>
+          <small class='text-muted'>Published on :{{post.published_date|date:"F d, Y"}}</small>
+          </div>
+        </div>
+    <div class="card-body blog">
+        <h5 class="card-title title">{{post.title|title}}</h5>
+
+        <p class="card-text">{{post.content|safe|truncatewords:"50"|linebreaks}}</p>
+        <a href="{% url 'blog:detail' pk=post.pk %}" class="btn btn-primary">
+        Read more
+        </a><br>
+        <div align='left' >
+      <a href="{% url 'blog:detail' pk=post.pk %}">Comments :</a>{{post.comments.count}}
+    </div>
+      </div>
+    </div>  
+
+    {% endif %}
+  {% endfor %}
+  
+{% endblock %}

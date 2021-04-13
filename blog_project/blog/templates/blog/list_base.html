@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	
+	{% for post in posts %}
+		{% if post.published_date %}
+		
+	<div class="media border mt-3  mr-3">
+  		<img class="rounded-circle"
+			src="{{ post.author.bloguser.profile_pic.url }}"
+			style="width:60px;">
+  		<div class="media-body">
+
+    		<h4>{{post.author}} <small class='text-muted'>{{post.published_date|date:"F d, Y"}}</small></h4>
+    		<h3><a href="{% url 'blog:detail' pk=post.pk %}">{{post.title|title}}</a></h3>
+
+			<div class="jumbotron bg-dark text-white align='center'">
+				<p class="article-content">{{post.content|safe|linebreaks}}</p>
+  			</div>
+
+  			{% block body %}
+  			{% endblock %}
+		</div>	
+		</div>	
+		
+		{% endif %}
+
+			
+	{% endfor %}
+
+{% endblock %}
+

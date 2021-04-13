@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container " align='center'>
+    
+    <h1 class="display-3 text-bold">{{ user.username|title }}</h1>
+
+ 
+</div>
+ <div class="media border mt-3 mr-3 ">
+        <a href="{{ user.bloguser.profile_pic.url }}"><img src="{{ user.bloguser.profile_pic.url }}" class="rounded-circle mt-3 ml-3" style="width:60px;"></a>
+
+      <div class="media-body mt-3">
+
+        <h2 > {{ user.username }} </h2>
+        <p> Email: {{ user.email }} </p > 
+
+    </div>  
+    </div>  
+
+    <a class='btn btn-primary mt-3'href="{% url 'profile_edit' pk=user.pk %}">Edit</a>
+    <a class='btn btn-primary mt-3'href="{% url 'blog:my_posts' %}">Your Blogs</a>
+
+{% endblock %}

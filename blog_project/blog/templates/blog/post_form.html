@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+	<div class='jumbotron' >
+
+		<form method='POST' enctype='multipart/form-data'>
+			{% csrf_token %}
+			{% bootstrap_form form %}
+			{{ form.media }}
+			<input class='btn btn-primary' type="submit" value="Post">
+		</form>
+			
+	</div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="container " align='center'>
+    
+    <h1 class="display-3 text-bold title">Drafts</h1>
+    <h5 class="text-gray-soft text-regular">All your blogs yet to be Published</h5>
+ 
+</div>
+{% for post in posts %}
+	{% if not post.published_date and user == post.author %}
+		<!-- Post Content -->
+		<div class="card content mt-3" >
+			{% if post.image and post.image != 'default.jpg' %}
+				<img  src="{{ post.image.url }}">
+			{% endif %}
+		<!-- Author and Profile image-->
+    	<div class="media" align='left'>
+    		<img class="rounded-circle "
+				src="{{ post.author.bloguser.profile_pic.url }}"
+				style="width:50px;">
+			<div class="media-body align='left' ">
+				<h4><a href="{% url 'post_user_profile' pk=post.pk %}">
+    				@{{post.author}}</a>
+    		 	</h4>
+    		 	<small class='text-muted'>Published on :{{post.published_date|date:"F d, Y"}}</small>
+    			</div>
+    		</div>
+ 		<div class="card-body blog">
+    		<h5 class="card-title title"><a href="{% url 'blog:detail' pk=post.pk %}" >
+    		{{post.title}}
+    		</a></h5>
+
+    		<p class="card-text">{{post.content|safe|truncatewords:"50"|linebreaks}}</p>
+    		<a href="{% url 'blog:detail' pk=post.pk %}" class="btn btn-primary">
+    		Read more
+    		</a><br>
+    	<div align='left' >
+			<a href="{% url 'blog:detail' pk=post.pk %}">Comments :</a>{{post.comments.count}}
+		</div>
+	</div>
+	
+<div align='center' class='mt-2'>
+		<a class='btn btn-primary' href="{% url 'blog:publish' pk=post.pk %}">Publish</a>
+		<a class='btn btn-success' href="{% url 'blog:update' pk=post.pk %}">Edit</a>
+		<a class='btn btn-danger' href="{% url 'blog:delete' pk=post.pk %}">Delete</a>
+</div>
+</div>
+		
+{% endif %}	
+{% empty %}
+	<h2>No Drafts!!</h2>
+{% endfor %}
+
+
+{% endblock %}
+
