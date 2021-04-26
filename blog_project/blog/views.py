@@ -9,7 +9,8 @@ from .comment_form import CommentForm
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.core.files.storage import default_storage 
+ 
 def index(request):
 	posts = Post.objects.all()
 	return render(request,'blog/index.html',context={'posts':posts})

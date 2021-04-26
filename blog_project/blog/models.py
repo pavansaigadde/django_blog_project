@@ -4,7 +4,8 @@ from django.utils import timezone
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from PIL import Image
- 
+from django.core.files.storage import default_storage   
+
 # Create your models here.
 class Post(models.Model):
 
@@ -16,15 +17,15 @@ class Post(models.Model):
 	image = models.ImageField(default='default.jpg',upload_to='post_images',blank=True)
 	author = models.ForeignKey(User,related_name='posts',on_delete=models.CASCADE,default='')
 
-	def save(self):
-		super().save()
-
-		img = Image.open(self.image.path)
-
-		if img.height>300 and img.width>300:
-			output_size = (300,300)
-			img.thumbnail(output_size)
-			img.save(self.image.path)
+# Edit the size of profile pic before saving
+# This works only on local file system not in AWS S3
+#	def save(self):
+#		super().save()
+#		img = Image.open(self.image.path)
+#		if img.height>300 and img.width>300:
+#			output_size = (300,300)
+#			img.thumbnail(output_size)
+#			img.save(self.image.path)
 
 	def publish(self):
 		self.published_date=timezone.now()

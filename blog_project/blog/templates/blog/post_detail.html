@@ -8,15 +8,20 @@
 					<img  src="{{ post.image.url }}">
 		{% endif %}
 		<!-- Author and Profile image-->
-    		<div class="media" align='left'>
+    		<div class="media middle" align='left'>
     			<img class="rounded-circle "
 				src="{{ post.author.bloguser.profile_pic.url }}"
 				style="width:50px;">
 				<div class="media-body align='left' ">
-					<h4><a href="{% url 'post_user_profile' pk=post.pk %}">
+					<h4><a class='link' href="{% url 'post_user_profile' pk=post.pk %}">
     				@{{post.author}}</a>
     		 	</h4>
-    		 	<small class='text-muted'>Published on :{{post.published_date|date:"F d, Y"}}</small>
+    		 	{%if post.published_date%}
+
+    		 	<small >Published on :{{post.published_date|date:"F d, Y"}}</small>
+    		 	{% else %}
+    		 	<small >Created on :{{post.created_date|date:"F d, Y"}}</small>
+    		 	{% endif %}
     			</div>
     		</div>
  		<div class="card-body blog">

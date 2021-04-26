@@ -7,8 +7,8 @@ from .models import BlogUser
 from django.contrib.auth.models import User
 from blog.models import Post,Comment
 from django.contrib.auth.decorators import login_required
-
-
+from django.core.files.storage import default_storage 
+ 
 # Register view
  
 def register(request):
@@ -26,7 +26,7 @@ def register(request):
 			profile.user = user 
 			if 'profile_pic' in request.FILES:
 				profile.profile_pic = request.FILES['profile_pic']
-
+ 
 			profile.save()
 	
 			return redirect("login")

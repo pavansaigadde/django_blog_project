@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'users',
     'blog',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -125,14 +126,39 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# Static - development
+#STATIC_URL = '/static/'
+#STATICFILES_DIRS = [
+#    STATIC_DIR,
+#]
+ 
+#Static files - Serving using AWS S3
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'django-blogproject-static-files'
+AWS_S3_CUSTOM_DOMAIN =f'{AWS_STORAGE_BUCKET_NAME}.s3.ap-south-1.amazonaws.com'
+AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = 'public-read'
+#AWS_DEFAULT_ACL = 'None'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 STATICFILES_DIRS = [
-    STATIC_DIR,
+   os.path.join(BASE_DIR,'static'),
 ]
+
+
+## Media - Development
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = MEDIA_DIR
+
+#the media storage configurations
+PUBLIC_MEDIA_LOCATION = 'media'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'blog_project.storage_backends.MediaStorage' 
+
+
 
 #login
 LOGIN_REDIRECT_URL ='blog:index'
 
-## Media
-MEDIA_URL = '/media/'
-MEDIA_ROOT = MEDIA_DIR
