@@ -7,7 +7,7 @@ Blogging website where users can create a profile and start create their own blo
 
 ## Tools:
   
-  Django
+  Django - Backend
   
   HTML
   
