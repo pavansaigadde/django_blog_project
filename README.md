@@ -8,6 +8,10 @@ Blogging website where users can create a profile and log into website and creat
 ## Tools:
   
   Django
+  
   HTML
+  
   CSS
+  
   Bootstrap
+  
