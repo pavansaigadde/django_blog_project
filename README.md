@@ -15,3 +15,9 @@ Blogging website where users can create a profile and log into website and creat
   
   Bootstrap
   
+  S3
+  
+  EC2
+  
+  RDS
+  
